@@ -1,2 +1,2 @@
 # Week 1 report
-Familiarized myself with the subject, algorithms needed data structures etc. Definition written, although it could use little more work after I get to the implementing phase and gain some more knowledge on the implementations of these algorithms. 
+Familiarized myself with the subject, algorithms needed data structures etc. Definition written, although it could use little more work after I get to the implementing phase and gain some more knowledge on the implementations of these algorithms. The algorithms seem pretty complex, so possible expansions to the software seem quite far-fetched. Also need to consult the instructor about the implemtation of some functions (What needs to be written from scratch).
