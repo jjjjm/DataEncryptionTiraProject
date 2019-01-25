@@ -1,16 +1,19 @@
 apply plugin: 'java'
+apply plugin: 'application'
 
 sourceCompatibility = '1.8'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-
-if (!hasProperty('mainClass')) {
-    ext.mainClass = ''
-}
+sourceSets.main.java.srcDirs = ['src']
+mainClassName = "main.Main"
 
 apply plugin: 'jacoco'
 
 repositories {
     mavenCentral()
+}
+
+run{
+    standardInput = System.in
 }
 
 dependencies {
