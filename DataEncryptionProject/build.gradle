@@ -8,8 +8,10 @@ mainClassName = "main.Main"
 
 apply plugin: 'jacoco'
 
+
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 run{
@@ -17,7 +19,8 @@ run{
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.10'
+testCompile 'junit:junit:4.12'
+compile 'junit:junit:4.12'
 }
 
 jacocoTestReport {

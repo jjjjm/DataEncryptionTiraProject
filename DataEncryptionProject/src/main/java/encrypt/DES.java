@@ -1,7 +1,7 @@
 package encrypt;
 
 import IO.FileHandler;
-import check.ParityCheck;
+import util.BinaryMatrix64;
 
 /**
  * Class implements the DES encryption algorithm, both enciphering and
@@ -11,8 +11,9 @@ public class DES implements Encryption {
 
     private String key;
     private FileHandler fileHandler;
-    private final ParityCheck parityChecker = new ParityCheck();
-    private final byte lastBitMask = 0b00000001;
+    private final byte lastBitMask = 0x1;
+    private final long leftMask = 0x0000FFFF;
+    private final long rightMask = 0xFFFF0000;
 
     /**
      * Creates a new DES-class
@@ -22,16 +23,11 @@ public class DES implements Encryption {
      * 64 bits
      */
     public DES(String key) {
-        if (validateKey(key)) {
+        if (key.getBytes().length == 8) {
             this.key = key;
         } else {
             throw new ExceptionInInitializerError("Not a valid key");
         }
-    }
-
-    private boolean validateKey(String key) {
-        byte[] keyBytes = key.getBytes();
-        return keyBytes.length == 8 && this.parityChecker.CheckDES(key);
     }
 
     @Override
@@ -43,14 +39,41 @@ public class DES implements Encryption {
     public void decrypt() {
         throw new UnsupportedOperationException();
     }
-    
+
     private byte removeParityBitsFromKey() {
         return 0;
     }
 
-    // Takes the first 64-bits (8 bytes) as an input and does Richard Outbridges Initial permutation function
-    private void initialPermutationFuction(Byte[] bytes) {
-        
+    // Takes the first 64-bits (8 bytes) as an input and returns the permutated as per Richard Outbridges Initial permutation
+    private long initialPermutationFuction(long initial) {
+        BinaryMatrix64 binMat = new BinaryMatrix64(initial);
+        binMat.transpose();
+        for (int x = 0; x < 4; x++) {
+            binMat.swapColumn(x, 7 - x);
+        }
+        for (int round = 0; round < 4; round++) {
+            for (int x = 0 + round; x < 8 - round; x += 2) {
+                binMat.swapRow(x, x + 1);
+            }
+        }
+
+        return binMat.getAsLongPrimitive();
+    }
+
+    //Inversed initialPermutationFunction
+    private long finalPermutationFunction(long initial) {
+        BinaryMatrix64 binMat = new BinaryMatrix64(initial);
+        binMat.transpose();
+        for (int x = 0; x < 4; x++) {
+            binMat.swapRow(x, 7 - x);
+        }
+        for (int round = 0; round < 4; round++) {
+            for (int x = 0 + round; x < 4; x += 1) {
+                binMat.swapColumn(x, x + (4 - round));
+            }
+        }
+
+        return binMat.getAsLongPrimitive();
     }
 
 }
