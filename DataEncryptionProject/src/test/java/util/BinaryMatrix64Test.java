@@ -9,7 +9,7 @@ public class BinaryMatrix64Test {
 
     @Test
     public void asLongPrimitiveReturnsOriginal() {
-        long expResult = 1234567l;
+        long expResult = 1024l;
         binMat = new BinaryMatrix64(expResult);
         assertEquals(binMat.getAsLongPrimitive(), expResult);
     }
@@ -26,9 +26,9 @@ public class BinaryMatrix64Test {
     @Test
     public void testSwapRowAndColumn() {
         long original = 2l;
-        long expected = 512l;
+        long expected = 256l;
         binMat = new BinaryMatrix64(original);
-        binMat.swapRowAndColumn(0, 1);
+        binMat.swapRowAndColumn(1, 1);
         assertEquals(expected, binMat.getAsLongPrimitive());
     }
 
@@ -46,7 +46,7 @@ public class BinaryMatrix64Test {
         long original = 1l;
         long expected = 2l;
         binMat = new BinaryMatrix64(original);
-        binMat.swapRow(1, 2);
+        binMat.swapColumn(0, 1);
         assertEquals(expected, binMat.getAsLongPrimitive());
     }
 

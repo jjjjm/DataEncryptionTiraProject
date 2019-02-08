@@ -17,7 +17,7 @@ package util;
 public class BinaryMatrix64 {
 
     final private long[][] matrix = new long[8][8];
-    final private byte lastBitMask = 0b1;
+    final private long lastBitMask = 0b1;
 
     /**
      * Creates a new BinaryMatrix and with zeros, so it represents 0 @Long
@@ -34,9 +34,9 @@ public class BinaryMatrix64 {
      */
     public BinaryMatrix64(long l) {
         long tmp = l;
-        for (int y = 0; y < 8; y++) {
-            for (int x = 0; x < 8; x++) {
-                matrix[x][y] = l & lastBitMask; //Mask everything else as zero and set ONLY the least significant bit as to the matrix;
+        for (int x = 0; x < 8; x++) {
+            for (int y = 0; y < 8; y++) {
+                matrix[x][y] = tmp & lastBitMask; //Mask everything else as zero and set ONLY the least significant bit as to the matrix;
                 tmp = tmp >> 1;
             }
         }
@@ -50,10 +50,11 @@ public class BinaryMatrix64 {
      */
     public long getAsLongPrimitive() {
         long longValue = 0;
-        for (int y = 7; y >= 0; y--) {
-            for (int x = 7; x >= 0; x--) {
+        for (int x = 7; x >= 0; x--) {
+            for (int y = 7; y >= 0; y--) {
                 longValue = longValue | matrix[x][y];
-                longValue = longValue << 1;
+                if (!(x == 0 && y == 0)) 
+                    longValue = longValue << 1;
             }
         }
         return longValue;
@@ -90,7 +91,7 @@ public class BinaryMatrix64 {
      * @param row2
      */
     public void swapRow(int row1, int row2) {
-        for (int o = 0; 0 < 8; o++) {
+        for (int o = 0; o < 8; o++) {
             swap(row1, o, row2, o);
         }
     }
@@ -102,13 +103,15 @@ public class BinaryMatrix64 {
      * @param column2
      */
     public void swapColumn(int column1, int column2) {
-        for (int o = 0; 0 < 8; o++) {
+        for (int o = 0; o < 8; o++) {
             swap(o, column1, o, column2);
         }
-        
-    }/*
+
+    }
+
+    /*
     Helper function for swapping methods.
-    */
+     */
     private void swap(int row1, int column1, int row2, int column2) {
         long tmp = matrix[row1][column1];
         matrix[row1][column1] = matrix[row2][column2];
