@@ -32,11 +32,12 @@ public class RC4 implements Encryption {
 
     @Override
     public long encrypt(long input) {
-        
+        return input ^ PRGA();
     }
 
     @Override
     public long decrypt(long input) {
+        return input ^ PRGA();
     }
 
     //Key-Scheduling Alorith (KSA)
