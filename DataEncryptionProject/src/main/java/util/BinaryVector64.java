@@ -98,4 +98,16 @@ public class BinaryVector64 {
         return this.vector[index];
     }
 
+    /**
+     * Left shifts the bits
+     */
+    public void leftShift() {
+        int len = this.vector.length - 1;
+        long tmpLast = this.vector[len];
+        for (int i = (len - 1); i >= 0; i--) {
+            this.vector[i + 1] = this.vector[i];
+        }
+        this.vector[0] = tmpLast;
+    }
+
 }

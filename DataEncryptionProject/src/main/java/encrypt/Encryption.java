@@ -2,7 +2,7 @@ package encrypt;
 
 public interface Encryption {
 
-    public void encrypt();
+    public long encrypt(long input);
 
-    public void decrypt();
+    public long decrypt(long input);
 }

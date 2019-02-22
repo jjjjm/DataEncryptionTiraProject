@@ -1,6 +1,7 @@
-package util;
+package UtilTest;
 
 import org.junit.Test;
+import util.BinaryMatrix64;
 import static org.junit.Assert.*;
 
 public class BinaryMatrix64Test {

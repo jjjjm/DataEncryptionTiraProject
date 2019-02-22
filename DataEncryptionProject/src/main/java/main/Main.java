@@ -6,9 +6,15 @@ import util.BinaryMatrix64;
 public class Main {
 
     public static void main(String[] args) {
-        BinaryMatrix64 bm = new BinaryMatrix64(0b1);
-        bm.swapColumn(0, 1);
-        System.out.println(Long.toBinaryString(bm.getAsLongPrimitive()));
+        int x = 0;
+        for (int i = 0; i < 64; i++) {
+            System.out.print(" X_" + i);
+            x++;
+            if (x == 6) {
+                System.out.print("|||");
+                x = 0;
+            }
+        }
     }
 
 }
