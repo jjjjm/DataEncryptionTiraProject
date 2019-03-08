@@ -6,6 +6,7 @@ The FileHandler class simply concatenates .RC4encrypted/.RC5enpcrypted to the gi
 
 All the encryption algorithms implement the Encryption interface which makes the readability a bit easier and also helps with the passing of data to the algorithms.
 
+![Data Flowchart](https://github.com/jjjjm/DataEncryptionTiraProject/blob/master/documentation/pics/flow.png)
 ## Achieved complexities.
 RC4 is O(m + n) where m = key size in bits and n = input size of the data being handled in bits. Since it only do constant amount of operations to the given input byte, this was quite easily achieved in the program. Also it does given manipulations to the given key when it's first given it can be easily seen also that this was achieved in the program.  
 RC5 has the same complexity
