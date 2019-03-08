@@ -9,6 +9,9 @@ Chart of the averages of time spent encrypting
 ![Encrypt Picture](https://github.com/jjjjm/DataEncryptionTiraProject/blob/master/documentation/pics/chart_time.png)  
 Chart of the averages of time spent decrypting  
 ![Decrypt picture](https://github.com/jjjjm/DataEncryptionTiraProject/blob/master/documentation/pics/chart_time_decrypt.png)  
+  
+As predicted, the scaling is linear as seen here.
+    
 Memory usage stayed the same with almost every time running (about +/- 5KB variation). Also checked with OS system monitor the program memory usage it also stayed the same with every run. This is not unexpected since the algorithms themselves do not use any more space than assigned after the first use and also only one block of data is taken in to program memory from the file and written, only after that new block is read from the file.
 ## How to test  
 Test can be reproduced by running the program and taking the data points, at least that's how the charts above were achieved. Each file size was tested 15 times then the average was calculated to get the data points.
