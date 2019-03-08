@@ -1,6 +1,9 @@
 # DataEncryptionTiraProject  
 
 * [Project definition document](https://github.com/jjjjm/DataEncryptionTiraProject/blob/master/documentation/definition_document.md)
+*[Testing document](https://github.com/jjjjm/DataEncryptionTiraProject/blob/master/documentation/testing_document.md)
+*[Running Instructions](https://github.com/jjjjm/DataEncryptionTiraProject/blob/master/documentation/running_instructions.md)
+* [Implementation Document](https://github.com/jjjjm/DataEncryptionTiraProject/blob/master/documentation/implementation_document.md)
 
 ## Weekly reports
 * [Week 1](https://github.com/jjjjm/DataEncryptionTiraProject/blob/master/documentation/week1_report.md)  
