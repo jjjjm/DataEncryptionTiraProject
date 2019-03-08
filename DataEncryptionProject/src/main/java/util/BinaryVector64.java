@@ -3,12 +3,13 @@ package util;
 /**
  * Represents an array of bits with length of 64. The least significant bit is
  * always at index 0 of the array. <\br>
- * e.g. With bits 1010011 the vector would look like this: [1,1,0,0,1,0,1]
+ * e.g. With bits 1010011... the vector would look like this:
+ * <\br>(first bit here) [1,1,0,0,1,0,1, ...] (nth bit here)
  */
 public class BinaryVector64 {
 
     private long[] vector = new long[64];
-    final private long lastBitMask = 0b1;
+    final private long lastBitMask = 0b1l;
 
     /**
      * Initialises the BinaryVector with the given long, bit by bit. That is,
@@ -19,21 +20,7 @@ public class BinaryVector64 {
     public BinaryVector64(long initial) {
         long tmp = initial;
         for (int i = 0; i < vector.length; i++) {
-            vector[i] = i & lastBitMask;
-            tmp = tmp >> 1;
-        }
-    }
-
-    /**
-     * Initialises the BinaryVector with the given int, bit by bit. That is, one
-     * bit is inserted to one index of the BinaryVector.
-     *
-     * @param initial
-     */
-    public BinaryVector64(int initial) {
-        int tmp = initial;
-        for (int i = 0; i < vector.length; i++) {
-            vector[i] = i & lastBitMask;
+            vector[i] = tmp & lastBitMask;
             tmp = tmp >> 1;
         }
     }
@@ -45,10 +32,11 @@ public class BinaryVector64 {
      */
     public long getAsLong() {
         long longValue = 0b0;
-        for (int i = vector.length - 1; i >= 0; i--) {
-            vector[i] = i & lastBitMask;
+        for (int i = vector.length - 1; i >= 1; i--) {
+            longValue = longValue | vector[i];
             longValue = longValue << 1;
         }
+        longValue = longValue | vector[0];
         return longValue;
     }
 
@@ -84,7 +72,7 @@ public class BinaryVector64 {
      * the least significant bit.
      */
     public void placeToIndex(int index, long value) {
-        this.vector[index] = lastBitMask & value;
+        this.vector[index] = value;
     }
 
     /**

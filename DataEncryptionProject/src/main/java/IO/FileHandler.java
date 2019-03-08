@@ -23,19 +23,31 @@ public class FileHandler {
      * interface
      *
      * @param fileName the name (and location) of the file
+     * @param extension The extension given to the file
+     * @param encrypted Check to determine if the file currently being read is
+     * encrypted.
+     * @throws java.io.FileNotFoundException
      */
-    public FileHandler(String fileName) {
+    public FileHandler(String fileName, String extension, boolean encrypted) throws FileNotFoundException {
         this.fileEnd = false;
         this.inputFile = new File(fileName);
-        this.outputFile = new File(fileName + ".encrypted");
+        inputStream = new FileInputStream(inputFile);
+        if (!encrypted) {
+            this.outputFile = new File(fileName + "." + extension + "encrypted");
+        } else {
+            this.outputFile = new File(fileName.substring(0, fileName.length() - 13));
+        }
+        outputStream = new FileOutputStream(outputFile);
     }
 
     /**
      * Used to check if the current file has ended
+     *
      * @return true if all the bytes in the file has been read else false;
+     * @throws java.io.IOException If the file designated doesn't exist
      */
-    public boolean isFileEnd() {
-        return fileEnd;
+    public boolean isFileEnd() throws IOException {
+        return inputStream.available() <= 0;
     }
 
     /**
@@ -45,17 +57,34 @@ public class FileHandler {
      * @throws FileNotFoundException If the file designated doesn't exist
      */
     public byte nextFileByte() throws FileNotFoundException {
-        inputStream = new FileInputStream(inputFile);
         try {
             if (inputStream.available() > 0) {
                 return (byte) inputStream.read();
             } else {
                 this.fileEnd = true;
-                inputStream.close();
             }
         } catch (IOException e) {
             System.out.println(e);
         }
-        return -1;
+        return 0;
     }
+
+    /**
+     * Writes the the given byte to the output file. Also creates the given file
+     * if it doesn't exist.
+     *
+     * @param byteToWrite
+     * @throws IOException
+     */
+    public void writeByte(byte byteToWrite) throws IOException {
+        this.outputStream.write(byteToWrite);
+    }
+    /**
+     * Closes the output stream
+     * @throws IOException 
+     */
+    public void closeStreams() throws IOException {
+        this.outputStream.close();
+    }
+
 }

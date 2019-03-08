@@ -14,11 +14,11 @@ public class RC4 implements Encryption {
      *
      * @param keySize the size of the key used, given in bytes, should range
      * from 5-256 inclusive
-     * @param key The key as long primitives, maximum is 2048 bits so 256 long
-     * primitives, as each long is supposed to represent one byte (8-bits) of
+     * @param key The key as long primitives, maximum is 2048 bits so 256 byte
+     * primitives, as each is supposed to represent one byte (8-bits) of
      * data.
      */
-    public RC4(int keySize, long... key) {
+    public RC4(int keySize, byte... key) {
         if (key.length < 5 | key.length > 256 | keySize != key.length) {
             throw new Error("Given key or key size is not valid");
         }

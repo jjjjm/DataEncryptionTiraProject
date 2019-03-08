@@ -1,0 +1,56 @@
+public long initialPermutationFuction(long initial) {
+    BinaryMatrix64 binMat = new BinaryMatrix64(initial);
+    binMat.transpose();
+    for (int x = 0; x < 4; x++) {
+        binMat.swapColumn(x, 7 - x);
+    }
+    for (int round = 0; round < 4; round++) {
+        for (int x = 0 + round; x < 8 - round; x += 2) {
+            binMat.swapRow(x, x + 1);
+        }
+    }
+
+    return binMat.getAsLongPrimitive();
+}
+--
+public long finalPermutationFunction(long initial) {
+    BinaryMatrix64 binMat = new BinaryMatrix64(initial);
+    binMat.transpose();
+    for (int x = 0; x < 4; x++) {
+        binMat.swapRow(x, 7 - x);
+    }
+    for (int round = 0; round < 4; round++) {
+        for (int x = 0 + round; x < 4; x += 1) {
+            binMat.swapColumn(x, x + (4 - round));
+        }
+    }
+
+    return binMat.getAsLongPrimitive();
+}
+--
+private long expansionFunction(long initial) {
+    BinaryVector64 initialVector = new BinaryVector64(initial);
+    BinaryVector64 finalVector = new BinaryVector64(0b0l);
+    finalVector.placeToIndex(47, initialVector.getIndexValue(0));
+    finalVector.placeToIndex(0, initialVector.getIndexValue(47));
+    int bitPositionDisplacementInput = 0;
+    int bitPositionDisplacementOutput = 1;
+    for (int round = 0; round < 8; round++) {
+        for (int sub = 0; sub < 4; sub++) {
+            long currentBit = initialVector.getIndexValue(bitPositionDisplacementInput);
+            if (round != 0 && sub == 0) {
+                finalVector.placeToIndex(bitPositionDisplacementOutput, currentBit);
+                finalVector.placeToIndex(bitPositionDisplacementOutput - 2, currentBit);
+            } else if (round != 7 && sub == 3) {
+                finalVector.placeToIndex(bitPositionDisplacementOutput, currentBit);
+                finalVector.placeToIndex(bitPositionDisplacementOutput + 2, currentBit);
+                bitPositionDisplacementOutput += 3;
+            } else {
+                finalVector.placeToIndex(bitPositionDisplacementOutput, currentBit);
+            }
+            bitPositionDisplacementInput++;
+            bitPositionDisplacementOutput++;
+        }
+    }
+    return finalVector.getAsLong();
+}
