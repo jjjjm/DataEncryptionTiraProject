@@ -4,7 +4,7 @@
 * [Testing document](https://github.com/jjjjm/DataEncryptionTiraProject/blob/master/documentation/testing_document.md)  
 * [Running Instructions](https://github.com/jjjjm/DataEncryptionTiraProject/blob/master/documentation/running_instructions.md)  
 * [Implementation Document](https://github.com/jjjjm/DataEncryptionTiraProject/blob/master/documentation/implementation_document.md)
-* [Jar can be found here](https://github.com/jjjjm/DataEncryptionTiraProject/releases/tag/final)
+* [Jar can be found here](https://github.com/jjjjm/DataEncryptionTiraProject/releases/tag/final) and [test files here](https://github.com/jjjjm/DataEncryptionTiraProject/tree/master/documentation/testfiles)
 ## Weekly reports
 * [Week 1](https://github.com/jjjjm/DataEncryptionTiraProject/blob/master/documentation/week1_report.md)  
 * [Week 2](https://github.com/jjjjm/DataEncryptionTiraProject/blob/master/documentation/week2_report.md)  
